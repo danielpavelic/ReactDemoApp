@@ -1,4 +1,6 @@
 'use strict';
+import * as types from '../constants/actionTypes';
+
 export function createArticle(article) {
-  return {type: 'CREATE_ARTICLE', article};
+  return {type: types.createArticle, article};
 }

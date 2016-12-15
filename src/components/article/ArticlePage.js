@@ -1,5 +1,8 @@
 'use strict';
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import * as articleActions from '../../actions/articleActions';
+import {bindActionCreators} from 'redux';
 
 class ArticlePage extends React.Component {
   constructor(props, context) {
@@ -19,14 +22,21 @@ class ArticlePage extends React.Component {
     this.setState({article: article});
   }
 
-  onClickSave(){
-    alert(`Saving ${this.state.article.title}`);
+  onClickSave() {
+    this.props.actions.createArticle(this.state.article);
+  }
+
+  articleRow(article, index) {
+    return <li key={index}>{article.title}</li>;
   }
 
   render() {
     return(
       <div>
         <h1>Article Page</h1>
+        <ul>
+          {this.props.articles.map(this.articleRow)}
+        </ul>
         <input
           type="text"
           onChange={this.onTitleChange}
@@ -39,7 +49,23 @@ class ArticlePage extends React.Component {
       </div>
     );
   }
-
-
 }
-export default ArticlePage;
+
+ArticlePage.propTypes = {
+  articles: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state, ownProps){
+  return {
+    articles: state.articles
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(articleActions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlePage);

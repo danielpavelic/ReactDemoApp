@@ -1,7 +1,9 @@
 'use strict';
+import * as types from '../constants/actionTypes';
+
 export default function articleReducer(state = [], action){
   switch (action.type){
-    case 'CREATE_ARTICLE':
+    case types.CREATE_ARTICLE:
       return [...state,
         Object.assign({}, action.article)
       ];
