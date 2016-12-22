@@ -10,7 +10,7 @@ export function loadArticles(){
   return function(dispatch){
     return articleApi.getAllArticles()
     .then(articles => {
-      dispatch(loadArticlesSuccess(articles))
+      dispatch(loadArticlesSuccess(articles));
     }).catch(error => {
       throw(error);
     });
