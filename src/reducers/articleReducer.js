@@ -3,10 +3,8 @@ import * as types from '../constants/actionTypes';
 
 export default function articleReducer(state = [], action){
   switch (action.type){
-    case types.CREATE_ARTICLE:
-      return [...state,
-        Object.assign({}, action.article)
-      ];
+    case types.LOAD_ARTICLES_SUCESS:
+      return action.articles;
 
       default:
         return state;

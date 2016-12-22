@@ -9,8 +9,10 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 //import '../node_modules/bootstrap/less/bootstrap.less';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
+import {loadArticles} from './actions/articleActions';
 
 const store = configureStore();
+store.dispatch(loadArticles());
 
 render(
   <Provider store={store}>
